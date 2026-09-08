@@ -8,10 +8,15 @@ Usage:
 """
 
 import os
+import subprocess
 import pandas as pd
 import numpy as np
 import joblib
 import streamlit as st
+
+# -- Auto-train if model does not exist (needed for cloud deployment) ----------
+if not os.path.exists(os.path.join("model", "food_waste_model.joblib")):
+    subprocess.run(["python", "train_model.py"], check=True)
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
